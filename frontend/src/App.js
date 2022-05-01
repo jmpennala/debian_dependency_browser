@@ -1,17 +1,19 @@
 import Deps from "./Deps";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Deps />}>
-          <Route index path="/:dep" element={<Deps />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Deps />}>
+            <Route index path="/:dep" element={<Deps />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
