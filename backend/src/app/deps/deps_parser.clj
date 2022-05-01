@@ -25,14 +25,14 @@
     (when current-dep (update deps :all-deps conj current-dep)) ; push previous dep to :all-deps vector
     (assoc-key-val-to-current-dependency "package" value))) ; start new dependency collection
 
-(defn begin-multiline-parsing [deps key value]
+(defn begin-multiline-parsing [deps key]
   (assoc deps :multiline {:enabled            true
                           :multiline-key      key
                           :intermediate-value ""}))
 
 (defn continue-multiline-parsing [deps value]
-  (->>
-    (update-in deps [:multiline :intermediate-value] str value)))
+  (let [trimmed-value (subs value 1)]
+    (update-in deps [:multiline :intermediate-value] str trimmed-value)))
 
 (defn finish-multiline-parsing [{{:keys [multiline-key intermediate-value]} :multiline :as deps}]
   (-> (assoc-key-val-to-current-dependency deps multiline-key intermediate-value)
@@ -50,7 +50,7 @@
           "Package" (init-new-package-to-deps updated-deps value)
           "Depends" (process-depends updated-deps value)
           "Description" (-> (assoc-key-val-to-current-dependency deps "short_description" value)
-                          (begin-multiline-parsing "description" value))
+                          (begin-multiline-parsing "description"))
           updated-deps)))))
 
 (defn finish-parsing [{:keys [current-dep] :as deps}]

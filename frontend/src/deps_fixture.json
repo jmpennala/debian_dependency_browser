@@ -1,0 +1,32 @@
+[
+  {
+    "package": "libio-string-perl",
+    "short_description": "Emulate IO",
+    "description": " The IO::String module provide the IO::File interface for in-core strings.  An IO::String object can be attached to a string, and will make it possible to use the normal file operations for reading or writing data, as well as seeking to various locations of the string. The main reason you might want to do this, is if you have some other library module that only provide an interface to file handles, and you want to keep all the stuff in memory. . The IO::String module provide an interface compatible with IO::File as distributed with IO-1.20, but the following methods are not available; new_from_fd, fdopen, format_write, format_page_number, format_lines_per_page, format_lines_left, format_name, format_top_name.",
+    "depends": ["perl"]
+  },
+  {
+    "package": "libxau6",
+    "short_description": "X11 authorisation library",
+    "description": " This package provides the main interface to the X11 authorisation handling, which controls authorisation for X connections, both client-side and server-side. . More information about X.Org can be found at: <URL:http://www.X.org> . This module can be found at git://anongit.freedesktop.org/git/xorg/lib/libXau",
+    "depends": ["libc6"]
+  },
+  {
+    "package": "liblockfile1",
+    "short_description": "NFS-safe locking library",
+    "description": " Liblockfile is a shared library with NFS-safe locking functions.",
+    "depends": ["liblockfile-bin", "libc6"]
+  },
+  {
+    "package": "lsof",
+    "short_description": "List open files",
+    "description": " Lsof is a Unix-specific diagnostic tool.  Its name stands for LiSt Open Files, and it does just that.  It lists information about any files that are open, by processes currently running on the system.",
+    "depends": ["libc6"]
+  },
+  {
+    "package": "libc6",
+    "short_description": "Embedded GNU C Library",
+    "description": " Contains the standard libraries that are used by nearly all programs on the system. This package includes shared versions of the standard C library and the standard math library, as well as many others.",
+    "depends": ["tzdata", "libc-bin", "libgcc1"]
+  }
+]

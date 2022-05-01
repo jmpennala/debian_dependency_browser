@@ -13,7 +13,6 @@
   (:gen-class))
 
 (defn deps-get-handler [params]
-  (println "params: " params)
   {:status 200
    :body   (deps/get-deps)})
 
