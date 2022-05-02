@@ -11,7 +11,7 @@
             [app.deps.deps-parser :as dp])
   (:gen-class))
 
-(def deps-file "resources/status.real")
+(def deps-file "resources/prod/status.real")
 
 (defn get-deps []
   (->
