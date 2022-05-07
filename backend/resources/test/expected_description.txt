@@ -1,0 +1,6 @@
+log4j is a tool to help the programmer output log statements to a variety of
+output targets.
+
+It is possible to enable logging at runtime without modifying the application
+binary. The log4j package is designed so that log statements can remain in
+shipped code without incurring a high performance cost.

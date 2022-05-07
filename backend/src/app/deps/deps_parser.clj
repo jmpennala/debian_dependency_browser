@@ -1,10 +1,14 @@
 (ns app.deps.deps-parser
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (def multiline-initial-value {:enabled            false
                               :key                nil
                               :intermediate-value nil})
+
+(def reduce-initial-value
+  {:all-deps    []
+   :current-dep nil
+   :multiline   multiline-initial-value})
 
 (defn- assoc-key-val-to-current-dependency [deps key val]
   (assoc-in deps [:current-dep key] val))
@@ -16,8 +20,7 @@
 (defn process-depends [deps value]
   (->> (str/split value #", ")
     (map drop-version)
-    (set)                                                   ; remove duplicates
-    (vec)
+    (distinct)
     (assoc-key-val-to-current-dependency deps "depends")))
 
 (defn- init-new-package-to-deps [{:keys [current-dep] :as deps} value]
@@ -56,10 +59,6 @@
 (defn finish-parsing [{:keys [current-dep] :as deps}]
   (when current-dep (update deps :all-deps conj current-dep)))
 
-(def reduce-initial-value
-  {:all-deps    []
-   :current-dep nil
-   :multiline   multiline-initial-value})
 
 (defn parse-deps [line-seq]
   (-> (reduce
