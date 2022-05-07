@@ -14,9 +14,8 @@ const Deps = () => {
       const json = await result.json();
 
       // sort to alphabetical order by package name
-      json?.sort(
-        (d1, d2) => d1.package.codePointAt() - d2.package.codePointAt()
-      );
+      // FIXME: bug in sorting
+      json?.sort((d1, d2) => (d1.package < d2.package ? -1 : 1));
 
       const reverseDeps = json?.reduce((reverseDeps, dep) => {
         if (dep.depends) {
@@ -37,9 +36,7 @@ const Deps = () => {
     fetchDeps();
   }, []);
 
-  const selectedDep = dep
-    ? deps?.deps?.filter((d) => d.package === dep)[0]
-    : null;
+  const selectedDep = dep ? deps?.deps?.find((d) => d.package === dep) : null;
 
   return (
     <div>

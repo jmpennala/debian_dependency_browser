@@ -27,9 +27,6 @@ describe("Dependency Browser", () => {
     render(<App url="/libc6" />);
 
     await waitFor(() => {
-      const linkElement = screen.getByText(/libc6/i);
-      linkElement.click();
-
       const packageElement = screen.getByText("Package: libc6");
       expect(packageElement).toBeInTheDocument();
     });
